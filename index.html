@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+        .box {
+            background-color: lightgray;
+            width: 20px;
+            height: 20px;
+        }
+
+        .body {
+            background-color: lightgreen;
+        }
+
+        .head {
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="flex justify-center items-center h-[100vh]">
+
+        <div class="relative">
+            <!-- container -->
+            <div id="container" class="grid grid-cols-20 gap-[1px]">
+            </div>
+
+            <div id="game-over" class="absolute top-[30%] left-[50%] -translate-x-[50%] hidden">
+                <div class="flex flex-col gap-4">
+                    <div class="bg-black px-5 rounded ">
+                        <h1 id="game-over-text" class="font-bold text-2xl text-red-500">Game Over</h1>
+                    </div>
+                    <button onclick="restart()" class="btn">Restart Game</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 w-[100px] mx-auto mt-[40px] gap-2 rotate-45">
+                <button onclick="setDirection('u')" class="btn rounded-full -rotate-45">up</button>
+                <button onclick="setDirection('r')" class="btn rounded-full -rotate-45">right</button>
+                <button onclick="setDirection('l')" class="btn rounded-full -rotate-45">left</button>
+                <button onclick="setDirection('d')" class="btn rounded-full -rotate-45">down</button>
+            </div>
+
+            <!-- <div class="mt-4 flex justify-center gap-4">
+                <button onclick="handleSpeed(100)" class="btn">fast</button>
+                <button onclick="handleSpeed(-100)" class="btn">Slow</button>
+            </div> -->
+        </div>
+
+    </main>
+    <script src="index.js"></script>
+
+</body>
+
+</html>
