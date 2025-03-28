@@ -46,7 +46,6 @@ const setDirection = (d) => {
 let isStop = false
 const gameOver = () => {
     gameOverContainer.classList.remove('hidden')
-    document.getElementById('game-over-text').innerText = 'You Died Bitch'
     isStop = true
 }
 
