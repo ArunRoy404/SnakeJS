@@ -1,3 +1,7 @@
+let snake = []
+let lastDirection = 'r'
+let direction = 'r'
+
 
 // generate game field 
 const container = document.getElementById('container')
@@ -11,7 +15,21 @@ const buildField = () => {
             container.appendChild(div)
         }
     }
+}
 
+const snakeBody = (head=[]) => {
+    snake.forEach(cell => {
+        const [i, j, isHead] = cell
+        const body = document.querySelector(`[i="${i}"][j="${j}"]`)
+        body.classList.add("body")
+        if (isHead || (head[0] === cell[0] && head[1] === cell[1])) {
+            body.classList.remove('body')
+            body.classList.add('head')
+        } else {
+            body.classList.add('body')
+            body.classList.remove('head')
+        }
+    })
 }
 
 // let isFruit = false
@@ -23,7 +41,7 @@ const buildField = () => {
 //     let fruit = [i,j]
 //     snake.forEach(array => {
 //         if (array.toString() == fruit.toString()) {
-            
+
 //         }
 //     })
 // }
@@ -38,7 +56,7 @@ const removeClass = (cell) => {
 }
 
 // handle direction onClick
-let direction = 'r'
+
 const setDirection = (d) => {
     direction = d
 }
@@ -50,9 +68,7 @@ const gameOver = () => {
 }
 
 
-let snake = [[0, 6, true], [0, 5], [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4]]
 const gameOverContainer = document.getElementById('game-over')
-let lastDirection = 'r'
 const startGame = (direction) => {
     removeClass(snake.pop())
     snake[0].pop()
@@ -80,11 +96,6 @@ const startGame = (direction) => {
     lastDirection = direction
 
 
-    if (snake.includes(head)) {
-        console.log(true)
-    }
-
-
     snake.forEach(array => {
         if (array.toString() == head.toString()) {
             gameOver()
@@ -98,22 +109,9 @@ const startGame = (direction) => {
         return
     }
 
-
-
     head.push(true)
     snake.unshift(head)
-    snake.forEach(cell => {
-        const [i, j, isHead] = cell
-        const body = document.querySelector(`[i="${i}"][j="${j}"]`)
-        body.classList.add("body")
-        if (isHead || (head[0] === cell[0] && head[1] === cell[1])) {
-            body.classList.remove('body')
-            body.classList.add('head')
-        } else {
-            body.classList.add('body')
-            body.classList.remove('head')
-        }
-    })
+    snakeBody(head)
 }
 
 // updateBody(direction)
@@ -135,10 +133,12 @@ setInterval(() => {
 const restart = () => {
     container.innerHTML = ``
     buildField()
-    direction = 'r'
-    snake = [[0, 6, true], [0, 5], [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4]]
     isStop = false
     gameOverContainer.classList.add('hidden')
+    direction = 'r'
+    lastDirection= ''
+    snake = [[0, 6, true], [0, 5], [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4]]
+    snakeBody()
     start()
 }
 restart()
