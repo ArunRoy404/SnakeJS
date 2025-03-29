@@ -1,6 +1,8 @@
 let snake = []
-let lastDirection = 'r'
-let direction = 'r'
+let lastDirection = ''
+let direction = ''
+
+// const tailDirection = [[0,4,'r']]
 
 
 // generate game field 
@@ -12,13 +14,19 @@ const buildField = () => {
             div.setAttribute('i', i)
             div.setAttribute('j', j)
             div.classList.add('box')
+
+            const innerDiv = document.createElement('div')
+            innerDiv.classList.add('bg-green-800')
+
+            div.appendChild(innerDiv)
+
             container.appendChild(div)
         }
     }
 }
 
-const snakeBody = (head=[]) => {
-    snake.forEach(cell => {
+const snakeBody = (head = []) => {
+    snake.forEach((cell,index) => {
         const [i, j, isHead] = cell
         const body = document.querySelector(`[i="${i}"][j="${j}"]`)
         body.classList.add("body")
@@ -29,6 +37,34 @@ const snakeBody = (head=[]) => {
             body.classList.add('body')
             body.classList.remove('head')
         }
+
+        body.classList.remove('lastHead')
+        if(index===1) body.classList.add('lastHead')
+
+
+        body.classList.remove('rotate-0', 'rotate-90', 'rotate-180', 'rotate-270')
+        if(index===0 || index===1){
+            switch(direction){
+                case 'l':
+                    body.classList.add('rotate-90')
+                    break 
+                case 'r':
+                    body.classList.add('rotate-270')
+                    break 
+                case 'u':
+                    body.classList.add('rotate-180')
+                    break 
+                case 'd':
+                    body.classList.add('rotate-0')
+                    break
+            }
+        }
+
+        // tail animation should be dynamic 
+        // if(index===snake.length-1){
+        //     body.classList.remove('body')
+        //     body.classList.add('tail')
+        // }
     })
 }
 
@@ -59,10 +95,13 @@ const removeClass = (cell) => {
 
 const setDirection = (d) => {
     direction = d
+    // console.log(snake)
 }
 
 let isStop = false
 const gameOver = () => {
+    const head = document.querySelector('.head')
+    head.classList.add('deadHead')
     gameOverContainer.classList.remove('hidden')
     isStop = true
 }
@@ -109,6 +148,10 @@ const startGame = (direction) => {
         return
     }
 
+    if(isStop){
+        return
+    }
+
     head.push(true)
     snake.unshift(head)
     snakeBody(head)
@@ -136,7 +179,7 @@ const restart = () => {
     isStop = false
     gameOverContainer.classList.add('hidden')
     direction = 'r'
-    lastDirection= ''
+    lastDirection = ''
     snake = [[0, 6, true], [0, 5], [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4]]
     snakeBody()
     start()

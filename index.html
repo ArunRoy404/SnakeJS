@@ -19,9 +19,43 @@
         .body {
             background-color: lightgreen;
         }
+        @keyframes anime {
+            from{
+                height: 0%;
+            }
+            to{
+                height: 100%;
+            }
+        }
+        @keyframes anime-rev {
+            from{
+                height: 100%;
+            }
+            to{
+                height: 0%;
+            }
+        }
 
-        .head {
-            background-color: green;
+        .head > div{
+            animation: anime .5s linear;
+        }
+        
+        .lastHead{
+            /* rotate: 270deg; */
+            position: relative;
+        }
+        .lastHead > div{
+            position: absolute;
+            width: 100%;
+            bottom: 0px;
+            animation: anime-rev .5s linear;
+        }
+        .tail > div{
+            background-color: lightgreen;
+            animation: anime-rev .5s linear;
+        }
+        .deadHead{
+            background-color: red;
         }
     </style>
 </head>
