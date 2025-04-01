@@ -1,6 +1,21 @@
 const gameOverContainer = document.getElementById('game-over')
 const scoreBoard = document.getElementById('score')
 
+const fruitImg = [
+    "./assets/apple.png",
+    "./assets/banana.png",
+    "./assets/cherry.png",
+    "./assets/grape.png",
+    "./assets/green.png",
+    "./assets/lemon.png",
+    "./assets/mango.png",
+    "./assets/melon.png",
+    "./assets/orange.png",
+    "./assets/purple.png",
+    "./assets/strawberry.png",
+    "./assets/yellow.png",
+]
+
 let snake = []
 let lastDirection = ''
 let direction = ''
@@ -29,7 +44,9 @@ const generateFruit = () => {
     }
 
     fruitBody = document.querySelector(`[i="${fruit[0]}"][j="${fruit[1]}"] .bg-green-800`)
-    fruitBody.innerHTML = `<img class="absolute top-0 p-[1px] -z-1" src=${'./assets/appple.png'}></img>`
+
+    const fruitIndex = Math.round(Math.random()*12)
+    fruitBody.innerHTML = `<img class="absolute top-0 p-[1px] -z-1" src=${fruitImg[fruitIndex]}></img>`
 }
 
 
@@ -257,8 +274,3 @@ const restart = () => {
     isFruit = false
 }
 restart()
-
-// buildField()
-// const handleSpeed =(value)=>{
-//     speed+=value
-// }
