@@ -15,6 +15,8 @@ const fruitImg = [
     "./assets/strawberry.png",
     "./assets/yellow.png",
 ]
+let fruitIndex = 0
+
 
 let snake = []
 let lastDirection = ''
@@ -45,8 +47,13 @@ const generateFruit = () => {
 
     fruitBody = document.querySelector(`[i="${fruit[0]}"][j="${fruit[1]}"] .bg-green-800`)
 
-    const fruitIndex = Math.round(Math.random()*12)
+    // const fruitIndex = Math.round(Math.random()*12)
     fruitBody.innerHTML = `<img class="absolute top-0 p-[1px] -z-1" src=${fruitImg[fruitIndex]}></img>`
+    if(fruitIndex==11){
+        fruitIndex = 0
+    }else{
+        fruitIndex++
+    }
 }
 
 
