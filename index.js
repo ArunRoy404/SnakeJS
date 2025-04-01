@@ -1,9 +1,12 @@
 const gameOverContainer = document.getElementById('game-over')
+const scoreBoard = document.getElementById('score')
+
 let snake = []
 let lastDirection = ''
 let direction = ''
+let score = 0
 
-const tailDirectionArray = [[0, 4, 'r']]
+const tailDirectionArray = []
 let tailDirection = ''
 
 
@@ -27,8 +30,6 @@ const generateFruit = () => {
 
     fruitBody = document.querySelector(`[i="${fruit[0]}"][j="${fruit[1]}"] .bg-green-800`)
     fruitBody.innerHTML = `<img class="absolute top-0 p-[1px] -z-1" src=${'./assets/appple.png'}></img>`
-
-
 }
 
 
@@ -147,9 +148,9 @@ const gameOver = () => {
 
 
 const startGame = (direction) => {
-    removeClass(snake.pop())
+    if(!didAte) removeClass(snake.pop())
     snake[0].pop()
-
+ 
     // choose direction 
     if (direction === 'l' && lastDirection === 'r') direction = 'r'
     if (direction === 'r' && lastDirection === 'l') direction = 'l'
@@ -192,6 +193,8 @@ const startGame = (direction) => {
 
     if (head.toString() == fruit.toString()) {
         didAte = true
+        score++
+        scoreBoard.innerText = score
     }
 
 
@@ -246,8 +249,8 @@ const restart = () => {
     gameOverContainer.classList.add('hidden')
     direction = 'r'
     lastDirection = 'r'
-    tailDirection = ''
-    snake = [[0, 6, true], [0, 5], [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4]]
+    tailDirection = 'r'
+    snake = [[0, 6, true], [0, 5], [0,4], [0,3]]
     snakeBody()
     start()
 
