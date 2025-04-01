@@ -44,7 +44,7 @@ const snakeBody = (head = []) => {
 
         body.classList.remove('rotate-0', 'rotate-90', 'rotate-180', 'rotate-270')
         if(index===0 || index===1){
-            switch(direction){
+            switch(lastDirection){
                 case 'l':
                     body.classList.add('rotate-90')
                     break 
@@ -179,7 +179,7 @@ const restart = () => {
     isStop = false
     gameOverContainer.classList.add('hidden')
     direction = 'r'
-    lastDirection = ''
+    lastDirection = 'r'
     snake = [[0, 6, true], [0, 5], [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4]]
     snakeBody()
     start()
