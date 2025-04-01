@@ -1,9 +1,30 @@
+const gameOverContainer = document.getElementById('game-over')
 let snake = []
 let lastDirection = ''
 let direction = ''
 
 const tailDirectionArray = [[0, 4, 'r']]
 let tailDirection = ''
+
+
+let isFruit = false
+let fruit = []
+let fruitBody = null;
+let didAte = false
+
+const generateFruit = () => {
+    let i;
+    let j;
+    i = Math.round(Math.random() * 19)
+    j = Math.round(Math.random() * 19)
+    fruit = [i,j]
+
+    fruitBody = document.querySelector(`[i="${fruit[0]}"][j="${fruit[1]}"] .bg-green-800`)
+    fruitBody.innerHTML = `<img class="absolute top-0 p-[1px] -z-1" src=${'./assets/appple.png'}></img>`
+
+    
+}
+
 
 // generate game field 
 const container = document.getElementById('container')
@@ -13,13 +34,12 @@ const buildField = () => {
             const div = document.createElement('div')
             div.setAttribute('i', i)
             div.setAttribute('j', j)
-            div.classList.add('box')
+            div.classList.add('box', 'relative', 'z-1')
 
             const innerDiv = document.createElement('div')
-            innerDiv.classList.add('bg-green-800')
+            innerDiv.classList.add('bg-green-800', 'z-10')
 
             div.appendChild(innerDiv)
-
             container.appendChild(div)
         }
     }
@@ -61,8 +81,6 @@ const snakeBody = (head = []) => {
         }
 
 
-
-
         // tail animation should be dynamic \
         body.classList.remove('tail')
         if (index === snake.length - 1) {
@@ -70,7 +88,6 @@ const snakeBody = (head = []) => {
                 if (cell.slice(0, 2) == tailDirectionArray[0].slice(0, 2).toString()) {
                     tailDirection = tailDirectionArray[0][2]
                     tailDirectionArray.shift()
-                    console.log(tailDirection)
                 }
             }
 
@@ -96,19 +113,6 @@ const snakeBody = (head = []) => {
     })
 }
 
-// let isFruit = false
-// const fruit = (snake) => {
-//     let i;
-//     let j;
-//     i = Math.round(Math.random() * 19)
-//     j = Math.round(Math.random() * 19)
-//     let fruit = [i,j]
-//     snake.forEach(array => {
-//         if (array.toString() == fruit.toString()) {
-
-//         }
-//     })
-// }
 
 
 // remove class  for tail 
@@ -135,7 +139,7 @@ const gameOver = () => {
 }
 
 
-const gameOverContainer = document.getElementById('game-over')
+
 const startGame = (direction) => {
     removeClass(snake.pop())
     snake[0].pop()
@@ -168,12 +172,23 @@ const startGame = (direction) => {
     else if (direction === 'd') {
         head[0]++
     }
-
-
-
     lastDirection = direction
 
 
+    if(didAte){
+        const innerDiv = document.createElement('div')
+        innerDiv.classList.add('bg-green-800', 'z-10')
+        fruitBody.innerHTML = null
+        fruitBody.appendChild(innerDiv)
+        didAte = false
+        isFruit = false
+    }
+
+    if (head.toString() == fruit.toString()) {       
+        didAte = true
+    }
+
+    
     snake.forEach(array => {
         if (array.toString() == head.toString()) {
             gameOver()
@@ -194,6 +209,12 @@ const startGame = (direction) => {
     head.push(true)
     snake.unshift(head)
     snakeBody(head)
+
+
+    if (!isFruit) {
+        isFruit = true
+        generateFruit()
+    }
 }
 
 // updateBody(direction)
@@ -223,6 +244,8 @@ const restart = () => {
     snake = [[0, 6, true], [0, 5], [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4]]
     snakeBody()
     start()
+
+    isFruit = false
 }
 restart()
 
