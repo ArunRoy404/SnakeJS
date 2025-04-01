@@ -50,13 +50,15 @@
             bottom: 0px;
             animation: anime-rev .5s linear;
         }
+        .deadHead{
+            background-color: red;
+        }
+
         .tail > div{
             background-color: lightgreen;
             animation: anime-rev .5s linear;
         }
-        .deadHead{
-            background-color: red;
-        }
+
     </style>
 </head>
 
@@ -65,7 +67,7 @@
 
         <div class="relative">
             <!-- container -->
-            <div id="container" class="grid grid-cols-20 ">
+            <div id="container" class="grid grid-cols-20 gap-[1px]">
             </div>
 
             <div id="game-over" class="absolute top-[30%] left-[50%] -translate-x-[50%] hidden">

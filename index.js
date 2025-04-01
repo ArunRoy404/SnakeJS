@@ -2,8 +2,8 @@ let snake = []
 let lastDirection = ''
 let direction = ''
 
-// const tailDirection = [[0,4,'r']]
-
+const tailDirectionArray = [[0, 4, 'r']]
+let tailDirection = ''
 
 // generate game field 
 const container = document.getElementById('container')
@@ -26,7 +26,7 @@ const buildField = () => {
 }
 
 const snakeBody = (head = []) => {
-    snake.forEach((cell,index) => {
+    snake.forEach((cell, index) => {
         const [i, j, isHead] = cell
         const body = document.querySelector(`[i="${i}"][j="${j}"]`)
         body.classList.add("body")
@@ -39,32 +39,60 @@ const snakeBody = (head = []) => {
         }
 
         body.classList.remove('lastHead')
-        if(index===1) body.classList.add('lastHead')
+        if (index === 1) body.classList.add('lastHead')
 
 
         body.classList.remove('rotate-0', 'rotate-90', 'rotate-180', 'rotate-270')
-        if(index===0 || index===1){
-            switch(lastDirection){
+        if (index === 0 || index === 1) {
+            switch (lastDirection) {
                 case 'l':
                     body.classList.add('rotate-90')
-                    break 
+                    break
                 case 'r':
                     body.classList.add('rotate-270')
-                    break 
+                    break
                 case 'u':
                     body.classList.add('rotate-180')
-                    break 
+                    break
                 case 'd':
                     body.classList.add('rotate-0')
                     break
             }
         }
 
-        // tail animation should be dynamic 
-        // if(index===snake.length-1){
-        //     body.classList.remove('body')
-        //     body.classList.add('tail')
-        // }
+
+
+
+        // tail animation should be dynamic \
+        body.classList.remove('tail')
+        if (index === snake.length - 1) {
+            if (tailDirectionArray.length) {
+                if (cell.slice(0, 2) == tailDirectionArray[0].slice(0, 2).toString()) {
+                    tailDirection = tailDirectionArray[0][2]
+                    tailDirectionArray.shift()
+                    console.log(tailDirection)
+                }
+            }
+
+            body.classList.remove('body')
+            body.classList.add('tail')
+
+            switch (tailDirection) {
+                case 'l':
+                    body.classList.add('rotate-270')
+                    break
+                case 'r':
+                    body.classList.add('rotate-90')
+                    break
+                case 'u':
+                    body.classList.add('rotate-0')
+                    break
+                case 'd':
+                    body.classList.add('rotate-180')
+                    break
+            }
+
+        }
     })
 }
 
@@ -118,8 +146,16 @@ const startGame = (direction) => {
     if (direction === 'u' && lastDirection === 'd') direction = 'd'
     if (direction === 'd' && lastDirection === 'u') direction = 'u'
 
-    // create head and control movement 
+
     let head = Array.from(snake[0])
+
+
+    if (direction !== lastDirection) {
+        tailDirectionArray.push([...head, direction])
+    }
+
+    // create head and control movement 
+
     if (direction === 'r') {
         head[1]++
     }
@@ -132,6 +168,9 @@ const startGame = (direction) => {
     else if (direction === 'd') {
         head[0]++
     }
+
+
+
     lastDirection = direction
 
 
@@ -148,7 +187,7 @@ const startGame = (direction) => {
         return
     }
 
-    if(isStop){
+    if (isStop) {
         return
     }
 
@@ -180,6 +219,7 @@ const restart = () => {
     gameOverContainer.classList.add('hidden')
     direction = 'r'
     lastDirection = 'r'
+    tailDirection = ''
     snake = [[0, 6, true], [0, 5], [0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4]]
     snakeBody()
     start()
