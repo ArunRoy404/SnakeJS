@@ -19,10 +19,16 @@ const generateFruit = () => {
     j = Math.round(Math.random() * 19)
     fruit = [i,j]
 
+    while (snake.toString().indexOf((fruit.toString())) > -1) {
+        i = Math.round(Math.random() * 19)
+        j = Math.round(Math.random() * 19)
+        fruit = [i, j]
+    }
+
     fruitBody = document.querySelector(`[i="${fruit[0]}"][j="${fruit[1]}"] .bg-green-800`)
     fruitBody.innerHTML = `<img class="absolute top-0 p-[1px] -z-1" src=${'./assets/appple.png'}></img>`
 
-    
+
 }
 
 
@@ -175,7 +181,7 @@ const startGame = (direction) => {
     lastDirection = direction
 
 
-    if(didAte){
+    if (didAte) {
         const innerDiv = document.createElement('div')
         innerDiv.classList.add('bg-green-800', 'z-10')
         fruitBody.innerHTML = null
@@ -184,11 +190,11 @@ const startGame = (direction) => {
         isFruit = false
     }
 
-    if (head.toString() == fruit.toString()) {       
+    if (head.toString() == fruit.toString()) {
         didAte = true
     }
 
-    
+
     snake.forEach(array => {
         if (array.toString() == head.toString()) {
             gameOver()
