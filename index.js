@@ -18,10 +18,13 @@ const fruitImg = [
 let fruitIndex = 0
 
 
+let score = 0
+let highScore = 0
+
 let snake = []
 let lastDirection = ''
 let direction = ''
-let score = 0
+
 
 const tailDirectionArray = []
 let tailDirection = ''
@@ -32,12 +35,30 @@ let fruit = []
 let fruitBody = null;
 let didAte = false
 
+
+const getScoreFromStorage = () => {
+    highScore = JSON.parse(localStorage.getItem('highScore'))
+    document.getElementById('high-score').innerText = 0
+
+    if (highScore) {
+        document.getElementById('high-score').innerText = highScore
+    }
+}
+getScoreFromStorage()
+
+const setHighScore = (score) => {
+    const saveScore = JSON.stringify(score)
+    localStorage.setItem('highScore', saveScore)
+    getScoreFromStorage()
+}
+
+
 const generateFruit = () => {
     let i;
     let j;
     i = Math.round(Math.random() * 19)
     j = Math.round(Math.random() * 19)
-    fruit = [i,j]
+    fruit = [i, j]
 
     while (snake.toString().indexOf((fruit.toString())) > -1) {
         i = Math.round(Math.random() * 19)
@@ -49,9 +70,9 @@ const generateFruit = () => {
 
     // const fruitIndex = Math.round(Math.random()*12)
     fruitBody.innerHTML = `<img class="absolute top-0 p-[1px] -z-1" src=${fruitImg[fruitIndex]}></img>`
-    if(fruitIndex==11){
+    if (fruitIndex == 11) {
         fruitIndex = 0
-    }else{
+    } else {
         fruitIndex++
     }
 }
@@ -163,6 +184,9 @@ const setDirection = (d) => {
 
 let isStop = false
 const gameOver = () => {
+    if (score > highScore) setHighScore(score)
+    score = 0
+    document.getElementById('score').innerText = score
     const head = document.querySelector('.head')
     head.classList.add('deadHead')
     gameOverContainer.classList.remove('hidden')
@@ -172,9 +196,9 @@ const gameOver = () => {
 
 
 const startGame = (direction) => {
-    if(!didAte) removeClass(snake.pop())
+    if (!didAte) removeClass(snake.pop())
     snake[0].pop()
- 
+
     // choose direction 
     if (direction === 'l' && lastDirection === 'r') direction = 'r'
     if (direction === 'r' && lastDirection === 'l') direction = 'l'
@@ -274,7 +298,7 @@ const restart = () => {
     direction = 'r'
     lastDirection = 'r'
     tailDirection = 'r'
-    snake = [[0, 6, true], [0, 5], [0,4], [0,3]]
+    snake = [[0, 6, true], [0, 5], [0, 4], [0, 3]]
     snakeBody()
     start()
 
