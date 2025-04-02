@@ -26,7 +26,7 @@ let lastDirection = ''
 let direction = ''
 
 
-const tailDirectionArray = []
+let tailDirectionArray = []
 let tailDirection = ''
 
 
@@ -299,6 +299,7 @@ const restart = () => {
     lastDirection = 'r'
     tailDirection = 'r'
     snake = [[0, 6, true], [0, 5], [0, 4], [0, 3]]
+    tailDirectionArray = []
     snakeBody()
     start()
 
