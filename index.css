@@ -75,6 +75,15 @@
     background-color: red;
 } */
 
+/* @keyframes active {
+    100%{
+       background-color: #a855f7; 
+    }
+} */
+.activeBtn{
+    /* animation: active 0.2s linear; */
+    background-color: #a855f7;
+}
 
 @media screen and (max-width: 575px) {
     .box{

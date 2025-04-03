@@ -182,6 +182,48 @@ const setDirection = (d) => {
     // console.log(snake)
 }
 
+const setActive = (id) =>{
+    document.getElementById(id).classList.add('activeBtn')
+}
+
+document.addEventListener('keyup',(e) => {
+
+    if(e.keyCode===87){
+        document.getElementById('u').classList.remove('activeBtn')
+    }
+    if(e.keyCode===65){
+        document.getElementById('l').classList.remove('activeBtn')
+    }
+    if(e.keyCode===83){
+        document.getElementById('d').classList.remove('activeBtn')
+    }
+    if(e.keyCode===68){
+        document.getElementById('r').classList.remove('activeBtn')
+    }
+})
+
+document.addEventListener('keypress',e =>{
+    const keyCode = e.keyCode
+    if(keyCode===119){
+        setDirection('u')
+        setActive('u')
+    }
+    if(keyCode===97){
+        setDirection('l')
+        setActive('l')
+    }
+    if(keyCode===115){
+        setDirection('d')
+        setActive('d')
+    }
+    if(keyCode===100){
+        setDirection('r')
+        setActive('r')
+    }
+})
+
+
+
 let isStop = false
 const gameOver = () => {
     if (score > highScore) setHighScore(score)

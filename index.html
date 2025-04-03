@@ -44,7 +44,7 @@
                 <div class="text-right md:pr-10 pt-8">
                     <h1 class="text-6xl font-bold bangers tracking-wider text-white ">snake</h1>
                 </div>
-                <div class="mt-11 md:mt-20 flex justify-center items-center">
+                <div class="mt-11 md:mt-14 flex justify-center items-center">
                     <div id="container" class="grid grid-cols-20">
                     </div>
 
@@ -78,18 +78,18 @@
                         font-bold bebas-neue tracking-wider    
                         flex justify-center items-center
                         ">
-                            <div class="w-max grid grid-cols-2 gap-2 rotate-45 ">
-                                <button onclick="setDirection('u')"
-                                    class="btn active:bg-purple-500 border-none shadow-none bg-[#878AF6] w-[60px] h-[60px] rounded-full">
+                            <div id="controller" class="w-max grid grid-cols-2 gap-2 rotate-45 ">
+                                <button id="u" onclick="setDirection('u')"
+                                    class=" cBtn btn active:bg-purple-500 border-none shadow-none bg-[#878AF6] w-[60px] h-[60px] rounded-full">
                                     <img class="-rotate-45" src="assets/play_arrow.png" alt=""></button>
-                                <button onclick="setDirection('r')"
-                                    class="btn active:bg-purple-500 border-none shadow-none bg-[#878AF6] w-[60px] h-[60px] rounded-full">
+                                <button id="r" onclick="setDirection('r')"
+                                    class="cBtn btn active:bg-purple-500 border-none shadow-none bg-[#878AF6] w-[60px] h-[60px] rounded-full">
                                     <img class="rotate-45" src="assets/play_arrow.png" alt=""></button>
-                                <button onclick="setDirection('l')"
-                                    class="btn active:bg-purple-500 border-none shadow-none bg-[#878AF6] w-[60px] h-[60px] rounded-full">
+                                <button id="l" onclick="setDirection('l')"
+                                    class="cBtn btn active:bg-purple-500 border-none shadow-none bg-[#878AF6] w-[60px] h-[60px] rounded-full">
                                     <img class="-rotate-135" src="assets/play_arrow.png" alt=""></button>
-                                <button onclick="setDirection('d')"
-                                    class="btn active:bg-purple-500 border-none shadow-none bg-[#878AF6] w-[60px] h-[60px] rounded-full">
+                                <button id="d" onclick="setDirection('d')"
+                                    class="cBtn btn active:bg-purple-500 border-none shadow-none bg-[#878AF6] w-[60px] h-[60px] rounded-full">
                                     <img class="rotate-135" src="assets/play_arrow.png" alt=""></button>
                             </div>
                         </div>
