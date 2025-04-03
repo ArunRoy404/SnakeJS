@@ -9,99 +9,94 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <style>
-        .box {
-            background-color: lightgray;
-            width: 20px;
-            height: 20px;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Bebas+Neue&display=swap" rel="stylesheet">
 
-        .body {
-            background-color: lightgreen;
-        }
-        @keyframes anime {
-            from{
-                height: 0%;
-            }
-            to{
-                height: 100%;
-            }
-        }
-        @keyframes anime-rev {
-            from{
-                height: 100%;
-            }
-            to{
-                height: 0%;
-            }
-        }
-
-        .head > div{
-            animation: anime .5s linear;
-        }
-        
-        .lastHead{
-            /* rotate: 270deg; */
-            position: relative;
-        }
-        .lastHead > div{
-            position: absolute;
-            width: 100%;
-            bottom: 0px;
-            animation: anime-rev .5s linear;
-        }
-        .deadHead{
-            background-color: red;
-        }
-
-        .tail > div{
-            background-color: lightgreen;
-            animation: anime-rev .5s linear;
-        }
-
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-    <main class="flex justify-center items-center h-[100vh]">
+    <main class="flex justify-center items-center h-[100vh] ">
+        <div id="main-container" class="relative md:w-[500px] h-[650px] md:h-[800px] bg-white p-2 rounded-[20px]">
 
-        <div class="relative">
-
-            <div class="flex justify-between items-center">
-                <div>
-                    <h1>Score: <span id="score">0</span></h1>
-                </div>
-                <div>
-                    <h1>High Score: <span id="high-score">0</span></h1>
-                </div>
-            </div>
-
-            <!-- container -->
-            <div id="container" class="grid grid-cols-20 gap-[1px]">
-            </div>
-
-            <div id="game-over" class="z-20 absolute top-[30%] left-[50%] -translate-x-[50%] hidden">
-                <div class="flex flex-col gap-4">
-                    <div class="bg-black px-5 rounded ">
-                        <h1 id="game-over-text" class="font-bold text-2xl text-red-500">Game Over</h1>
+            <div class="absolute border-b-[8px] border-r-[8px] border-white rounded-br-2xl
+                        
+                        after:absolute after:content-[''] after:w-5 after:h-5 after:top-0 after:-right-7 
+                        after:rounded-tl-xl after:shadow-[-5px_-5px_white] after:bg-transparent
+                        
+                        before:absolute before:content-[''] before:w-5 before:h-5 before:-bottom-7
+                        before:rounded-tl-xl before:shadow-[-5px_-5px_white] before:bg-transparent
+                        ">
+                <div class="bg-white">
+                    <div class=" score-container
+                        top-2 left-2 rounded-2xl z-10 
+                        bg-[#AEB0F2] w-[250px] p-4 text-white 
+                        font-bold bebas-neue tracking-wider">
+                        <h3 class="text-2xl">High Score: <span id="high-score">0</span></h3>
+                        <h2 class="text-5xl">Score: <span id="score">0</span></h2>
                     </div>
-                    <button onclick="restart()" class="btn">Restart Game</button>
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 w-[100px] mx-auto mt-[40px] gap-2 rotate-45">
-                <button onclick="setDirection('u')" class="btn rounded-full -rotate-45">up</button>
-                <button onclick="setDirection('r')" class="btn rounded-full -rotate-45">right</button>
-                <button onclick="setDirection('l')" class="btn rounded-full -rotate-45">left</button>
-                <button onclick="setDirection('d')" class="btn rounded-full -rotate-45">down</button>
+
+            <div id="field-container" class="h-full bg-[#878AF6]  rounded-2xl">
+                <div class="text-right md:pr-10 pt-8">
+                    <h1 class="text-6xl font-bold bangers tracking-wider text-white ">snake</h1>
+                </div>
+                <div class="mt-11 md:mt-20 flex justify-center items-center">
+                    <div id="container" class="grid grid-cols-20">
+                    </div>
+
+
+                    <div id="game-over" class="z-20 absolute hidden">
+                        <div class="flex flex-col gap-4">
+                            <div class="bg-black px-10 py-3 rounded ">
+                                <h1 id="game-over-text" class="font-bold text-2xl text-red-500">Game Over</h1>
+                            </div>
+                            <button onclick="restart()" class="btn">Restart Game</button>
+                        </div>
+                    </div>
+
+
+                </div>
             </div>
 
-            <!-- <div class="mt-4 flex justify-center gap-4">
-                <button onclick="handleSpeed(100)" class="btn">fast</button>
-                <button onclick="handleSpeed(-100)" class="btn">Slow</button>
-            </div> -->
+            <div>
+                <div class=" absolute bottom-0 right-0 border-[8px] border-white rounded-tl-2xl rounded-br-2xl
+                        
+                        after:absolute after:content-[''] after:w-5 after:h-5 after:-top-7 after:right-0
+                        after:rounded-br-xl after:shadow-[5px_5px_white] after:bg-transparent
+                    
+                        before:absolute before:content-[''] before:w-5 before:h-5 before:bottom-0 before:-left-7
+                        before:rounded-br-xl before:shadow-[5px_5px_white] before:bg-transparent
+                        ">
+                    <div class="bg-white">
+                        <div class=" score-container
+                        top-2 left-2 rounded-2xl z-10 
+                        bg-[#AEB0F2]  md:w-[220px] md:h-[200px] p-5 text-white 
+                        font-bold bebas-neue tracking-wider    
+                        flex justify-center items-center
+                        ">
+                            <div class="w-max grid grid-cols-2 gap-2 rotate-45 ">
+                                <button onclick="setDirection('u')"
+                                    class="btn active:bg-purple-500 border-none shadow-none bg-[#878AF6] w-[60px] h-[60px] rounded-full">
+                                    <img class="-rotate-45" src="assets/play_arrow.png" alt=""></button>
+                                <button onclick="setDirection('r')"
+                                    class="btn active:bg-purple-500 border-none shadow-none bg-[#878AF6] w-[60px] h-[60px] rounded-full">
+                                    <img class="rotate-45" src="assets/play_arrow.png" alt=""></button>
+                                <button onclick="setDirection('l')"
+                                    class="btn active:bg-purple-500 border-none shadow-none bg-[#878AF6] w-[60px] h-[60px] rounded-full">
+                                    <img class="-rotate-135" src="assets/play_arrow.png" alt=""></button>
+                                <button onclick="setDirection('d')"
+                                    class="btn active:bg-purple-500 border-none shadow-none bg-[#878AF6] w-[60px] h-[60px] rounded-full">
+                                    <img class="rotate-135" src="assets/play_arrow.png" alt=""></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
     </main>
     <script src="index.js"></script>
 
