@@ -66,7 +66,7 @@ const generateFruit = () => {
         fruit = [i, j]
     }
 
-    fruitBody = document.querySelector(`[i="${fruit[0]}"][j="${fruit[1]}"] .bg-green-800`)
+    fruitBody = document.querySelector(`[i="${fruit[0]}"][j="${fruit[1]}"] .bg-violet-400`)
 
     // const fruitIndex = Math.round(Math.random()*12)
     fruitBody.innerHTML = `<img class="absolute top-0 p-[1px] -z-1" src=${fruitImg[fruitIndex]}></img>`
@@ -89,7 +89,7 @@ const buildField = () => {
             div.classList.add('box', 'relative', 'z-1')
 
             const innerDiv = document.createElement('div')
-            innerDiv.classList.add('bg-green-800', 'z-10')
+            innerDiv.classList.add('bg-violet-400', 'z-10')
 
             div.appendChild(innerDiv)
             container.appendChild(div)
@@ -232,7 +232,7 @@ const startGame = (direction) => {
 
     if (didAte) {
         const innerDiv = document.createElement('div')
-        innerDiv.classList.add('bg-green-800', 'z-10')
+        innerDiv.classList.add('bg-violet-400', 'z-10')
         fruitBody.innerHTML = null
         fruitBody.appendChild(innerDiv)
         didAte = false

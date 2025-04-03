@@ -16,7 +16,7 @@
 }
 
 .body {
-    background-color: lightgreen;
+    background-color: #AEB0F2;
 }
 
 @keyframes anime {
@@ -60,7 +60,7 @@
 }
 
 .tail>div {
-    background-color: lightgreen;
+    background-color: #AEB0F2;
     animation: anime-rev .5s linear;
 }
 /* 
